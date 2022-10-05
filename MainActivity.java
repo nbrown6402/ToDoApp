@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {            //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        ArrayList<String> taskList = new ArrayList<>();
-        SQLiteDatabase db = mHelper.getReadableDatabase();
+        ArrayList<String> taskList = new ArrayList<>();                     //stores the strings entered by the user into a database that is then used to add
+        SQLiteDatabase db = mHelper.getReadableDatabase();                  //or remove tasks from the Task list
         Cursor cursor = db.query(TaskContract.TaskEntry.TABLE,
                 new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COL_TASK_TITLE},
                 null, null, null, null, null);
@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {             //Creates a blank list
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item) {           //when the onOptionsItemSelected button is selected the user is prompted with an AlertDialog
+        switch (item.getItemId()) {                                 //box asking what task they wish to add to their task list
             case R.id.action_add_task:
                 final EditText taskEditText = new EditText(this);
                 AlertDialog dialog = new AlertDialog.Builder(this)
@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
                         .setView(taskEditText)
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String task = String.valueOf(taskEditText.getText());
+                            public void onClick(DialogInterface dialog, int which) {        //when the Add button is hit the task that was entered will be taken in
+                                String task = String.valueOf(taskEditText.getText());       //as a string and added to the main list
                                 SQLiteDatabase db = mHelper.getWritableDatabase();
                                 ContentValues values = new ContentValues();
                                 values.put(TaskContract.TaskEntry.COL_TASK_TITLE, task);
@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void deleteTask(View view) {
-        View parent = (View) view.getParent();
+    public void deleteTask(View view) {                                     //when a task is done the user can hit the done button next to their task which in turn 
+        View parent = (View) view.getParent();                              //removes the task from the list
         TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
         String task = String.valueOf(taskTextView.getText());
         SQLiteDatabase db = mHelper.getWritableDatabase();
