@@ -1,0 +1,5 @@
+This program is a To Do List made in Android Studio for a Google Pixel phone.The user can 
+add tasks by hitting the "ADD" button and enter in there task they wish to add. They can 
+then add the task or cancel and not add the task. If the user decides to add the task they
+can remove the task once they have completed it. The user can remove the task by hitting the 
+"DONE" button which appears at the end of a task line when a user adds a task.
